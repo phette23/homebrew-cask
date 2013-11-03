@@ -79,9 +79,53 @@ Fill in the following fields for your Cask:
 | `install`          | relative path to `pkg` that should be run to install the application
 | `uninstall`        | indicates what commands/scripts must be run to uninstall a pkg-based application (see "Uninstall Support" for more information)
 
-### Naming convention
+### Naming Casks
 
-Please, be sure to follow this [issue](https://github.com/phinze/homebrew-cask/issues/365) to name your cask correctly.
+We try to maintain a strict naming policy so everything stays consistent. Here are the rules:
+
+__Start from the app's Canonical Name__:
+
+  * do your best to find the canonical name for the title of the app you're submitting a cask for
+  * this can usually be found on the author's website or within the application itself; however the author writes tha app name is how it should be styled
+  * pay attention to details: `"Git Hub" != "git_hub" != "GitHub"`
+
+__Cask name__:
+
+A Cask's "title" is its primary identifier in our project. It's the string people will use to interact with this Cask on their system.
+
+To get from an app's canonical name to a Cask name:
+
+  * all lower case
+  * spaces become hyphens
+  * digits stay digits
+  * examples
+    - "Audio Hijack Pro" => "audio-hijack-pro"
+    - "VLC" => "vlc"
+    - "BetterTouchTool" => "bettertouchtool"
+    - "1Password" => "1password" (see __NAMING NOTE__)
+
+Casks are stored in a ruby file matching their name.
+
+__Cask class__:
+
+Casks are implemented as Ruby classes, so a Cask's "class" needs to be a valid Ruby class name.
+
+When going __Cask name__s and __Cask class__es,
+
+  * UpperCamelCased
+  * wherever a hyphen occurs in the __Cask name__, the __class__ has a case change
+  * invalid characters are replaced with english word equivalents
+  * examples
+    - "audio-hijack-pro" => "AudioHijackPro"
+    - "vlc" => "Vlc"
+    - "bettertouchtool" => "Bettertouchtool"
+    - "1password" => "OnePassword" (see __NAMING NOTE__)
+
+__NAMING NOTE__:
+
+When a Cask's _name_ does not map to a valid ruby class (like when it starts with a number) there's an incoming feature to allow Cask _classes_ to indicate the proper name.
+
+This feature is not yet complete, so you'll see __Cask name__s that mass the __class__ naming convention for the time being. When this is all sorted out, this note will disappear.
 
 ### Uninstall Support
 
